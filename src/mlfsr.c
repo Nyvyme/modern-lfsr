@@ -6,14 +6,16 @@ static struct {
   char carry;
 } mlfsrState = {0};
 
-int mlfsrRand(void) {
-  if (mlfsrState.seed == 0 ||
-      mlfsrState.mask == 0) {
-    mlfsrState.seed = (int)&mlfsrState + (int)&mlfsrState.carry;
-    mlfsrState.mask =
-      (((int)&mlfsrState.mask + (int)&mlfsrState.seed) ^ (int)&mlfsrState);
-  }
+static int seedAndMaskSet = 0;
 
+void mlfsrSetSeedAndMask(void) {
+  mlfsrState.seed = (int)&mlfsrState + (int)&mlfsrState.carry;
+  mlfsrState.mask =
+    (((int)&mlfsrState.mask + (int)&mlfsrState.seed) ^ (int)&mlfsrState);
+  seedAndMaskSet = 1;
+}
+
+int mlfsrRand(void) {
   mlfsrState.carry = (mlfsrState.seed & 1);
   mlfsrState.seed = mlfsrState.seed >> 1;
   mlfsrState.seed ^= (mlfsrState.mask * mlfsrState.carry);
