@@ -17,9 +17,6 @@ int mlfsrRandInRange(int min, int max); // generate a random 32 bit number in ra
 ```
 $ git clone https://github.com/NoWare-Development/modern-lfsr.git"
 $ cd mlfsr
-$ mkdir build && cd build
-$ cmake .. -DBUILD_SHARED=ON/OFF
-$ cmake --build .
+$ meson setup build
+$ ninja -C build
 ```
-
-Option `BUILD_SHARED` describes what type of library will be built (shared or static), by default it is set to `ON`.
