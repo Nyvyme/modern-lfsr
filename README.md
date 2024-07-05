@@ -15,7 +15,7 @@ int mlfsrRandInRange(int min, int max); // generate a random 32 bit number in ra
 
 ## Manual Build
 ```
-$ git clone https://github.com/NoWare-Development/modern-lfsr.git"
+$ git clone https://github.com/NoWare-Development/modern-lfsr.git
 $ cd mlfsr
 $ meson setup build
 $ ninja -C build
